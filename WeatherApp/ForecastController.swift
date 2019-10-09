@@ -15,7 +15,6 @@ class ForecasController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.asd2.text = "Testi 2 onnistunut"
         // Do any additional setup after loading the view, typically from a nib.
     }
     

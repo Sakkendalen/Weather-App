@@ -6,9 +6,15 @@
 //  Copyright © 2019 Saku Tynjälä. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class DataController {
     
+    var latitude : Double?
+    var longitude : Double?
+    
+    init() {
+        
+    }
     
 }

@@ -7,17 +7,19 @@
 //
 
 import UIKit
+import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
     var dataCont : DataController?
+    var locationManager : CLLocationManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.locationManager = CLLocationManager()
         let tabController = window?.rootViewController as! UITabBarController
-        
         
         let curController = tabController.viewControllers![0] as! CurrentWeatherController
         let foreController = tabController.viewControllers![1] as! ForecasController
@@ -29,8 +31,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         foreController.dataController = self.dataCont
         cityController.dataController = self.dataCont
         
+        self.locationManager!.delegate = self
+        locationManager!.requestAlwaysAuthorization()
+        self.locationManager!.startUpdatingLocation()
         
         return true
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let loc = locations.last
+        let lat = loc!.coordinate.latitude
+        let lon = loc!.coordinate.longitude
+        print(lat)
+        print(lon)
+        dataCont?.longitude = lon
+        dataCont?.latitude = lat
+        self.locationManager!.stopUpdatingLocation()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

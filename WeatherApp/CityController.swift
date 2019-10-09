@@ -15,7 +15,6 @@ class CityController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.asd3.text = "Testi 3 onnistunut"
         // Do any additional setup after loading the view, typically from a nib.
     }
     
