@@ -44,8 +44,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let lon = loc!.coordinate.longitude
         print(lat)
         print(lon)
-        dataCont?.longitude = lon
-        dataCont?.latitude = lat
+        dataCont!.longitude = lon
+        dataCont!.latitude = lat
+        dataCont!.fethlocations()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
+            self.dataCont!.getWeather()
+        }
         self.locationManager!.stopUpdatingLocation()
     }
 
