@@ -12,11 +12,24 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var dataCont : DataController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        print("asdasd")
+        let tabController = window?.rootViewController as! UITabBarController
+        
+        
+        let curController = tabController.viewControllers![0] as! CurrentWeatherController
+        let foreController = tabController.viewControllers![1] as! ForecasController
+        let cityController = tabController.viewControllers![2] as! CityController
+ 
+        dataCont = DataController()
+        
+        curController.dataController = self.dataCont
+        foreController.dataController = self.dataCont
+        cityController.dataController = self.dataCont
+        
+        
         return true
     }
 

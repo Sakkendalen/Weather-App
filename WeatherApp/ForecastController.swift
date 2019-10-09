@@ -8,13 +8,17 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ForecasController: UIViewController {
+    
+    var dataController : DataController!
+    @IBOutlet weak var asd2: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.asd2.text = "Testi 2 onnistunut"
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-
+    
+    
 }
 
