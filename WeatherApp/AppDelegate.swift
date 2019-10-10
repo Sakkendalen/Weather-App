@@ -49,8 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         //let loc = locations.last
         let lat = self.locationManager?.location!.coordinate.latitude
         let lon = self.locationManager?.location!.coordinate.longitude
-        print(lat)
-        print(lon)
         fecthUrl(url: "https://api.openweathermap.org/data/2.5/weather?lat=\(lat!)&lon=\(lon!)&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")
         self.locationManager!.stopUpdatingLocation()
     }
@@ -92,24 +90,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     func doneFetching(data: Data?, response: URLResponse?, error: Error?) {
-        //let resstr = String(data: data!, encoding: String.Encoding.utf8)
         
         // Execute stuff in UI thread
-        DispatchQueue.main.async(execute: {() in
+        if let resstr = String(data: data!, encoding: String.Encoding.utf8){
             do{
-                let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
+                _ = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
                 //print(json)
                 let model = try JSONDecoder().decode(WeatherDataModel.self, from:data!)
                 //print(model)
-                self.passDatatoCurrent(model: model)
-            } catch {
+                
+                self.fecthUrl(url: "https://openweathermap.org/img/wn/\(model.weather[0].icon)@2x.png")
+                
+                DispatchQueue.main.async(execute: {() in
+                    self.passDatatoCurrent(model: model)
+                })
+            }catch{
                 print(error)
             }
-        })
+        } else if let image = UIImage(data: data!){
+            DispatchQueue.main.async(execute: {() in
+                self.passImagetoCurrent(image: image)
+            })
+        }
     }
     
     func passDatatoCurrent(model: WeatherDataModel){
         curController!.takeData(model: model)
+    }
+    
+    func passImagetoCurrent(image: UIImage){
+        curController!.takeImage(image: image)
     }
     
     /*

@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="01d.png" translatesAutoresizingMaskIntoConstraints="NO" id="sS1-I0-n1y">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sS1-I0-n1y">
                                 <rect key="frame" x="157" y="318" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="4N2-LR-LAd"/>
@@ -32,6 +32,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="placehold" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDg-hP-VUa">
+                                <rect key="frame" x="169.66666666666666" y="238" width="74.666666666666657" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="placehold" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QBR-S2-K45">
                                 <rect key="frame" x="169.66666666666666" y="278" width="74.666666666666657" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -41,16 +47,19 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="hgK-0W-j2P" firstAttribute="top" secondItem="sS1-I0-n1y" secondAttribute="bottom" constant="20" id="80c-JQ-JYe"/>
-                            <constraint firstItem="eDg-hP-VUa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Cd1-vh-9Xp"/>
-                            <constraint firstItem="sS1-I0-n1y" firstAttribute="top" secondItem="eDg-hP-VUa" secondAttribute="bottom" constant="20" id="KT6-x1-JEV"/>
+                            <constraint firstItem="QBR-S2-K45" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ip5-zi-2UK"/>
                             <constraint firstItem="sS1-I0-n1y" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Min-FZ-nx2"/>
+                            <constraint firstItem="sS1-I0-n1y" firstAttribute="top" secondItem="QBR-S2-K45" secondAttribute="bottom" constant="20" id="Vjv-aH-fq2"/>
                             <constraint firstItem="sS1-I0-n1y" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="cAb-TY-Bk6"/>
                             <constraint firstItem="hgK-0W-j2P" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nML-56-5ru"/>
+                            <constraint firstItem="eDg-hP-VUa" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rhp-23-Ecg"/>
+                            <constraint firstItem="QBR-S2-K45" firstAttribute="top" secondItem="eDg-hP-VUa" secondAttribute="bottom" constant="20" id="y3p-uX-gWY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Current" id="g89-0o-wGt"/>
                     <connections>
+                        <outlet property="desc" destination="QBR-S2-K45" id="d5T-SQ-Fl2"/>
                         <outlet property="image" destination="sS1-I0-n1y" id="txP-rb-QRq"/>
                         <outlet property="place" destination="eDg-hP-VUa" id="VCW-IY-OUH"/>
                         <outlet property="temperature" destination="hgK-0W-j2P" id="5Cl-lS-ojj"/>
@@ -143,7 +152,4 @@
             <point key="canvasLocation" x="535" y="108"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="01d.png" width="100" height="100"/>
-    </resources>
 </document>
