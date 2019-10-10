@@ -5,7 +5,7 @@
 //  Created by Saku Tynjälä on 08/10/2019.
 //  Copyright © 2019 Saku Tynjälä. All rights reserved.
 //
-
+/*
 import Foundation
 import CoreLocation
 
@@ -26,8 +26,8 @@ class DataController {
         let lonInt : Double = self.longitude!
         print(latInt)
         let session = URLSession.shared
-        //Not Working! Nothing to GeoCode!!!
-        let weatherURL = URL(string: "http://api.openweathermap.org/data/2.5/weather?lat=\(latInt)&lon\(lonInt)&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")!
+        //HOX!!! PLACEHOLDER CUPERTINO!!
+        let weatherURL = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=California,us&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")!
         let dataTask = session.dataTask(with: weatherURL) {
             (data: Data?, response: URLResponse?, error: Error?) in
             if let error = error {
@@ -80,8 +80,6 @@ class DataController {
     }
     
 }
-
-/*
  //
  //  ViewController.swift
  //  WeatherApp

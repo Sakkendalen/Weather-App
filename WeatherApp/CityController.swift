@@ -10,7 +10,6 @@ import UIKit
 
 class CityController: UIViewController {
     
-    var dataController : DataController!
     @IBOutlet weak var asd3: UILabel!
     
     override func viewDidLoad() {

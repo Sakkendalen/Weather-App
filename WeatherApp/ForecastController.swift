@@ -10,7 +10,6 @@ import UIKit
 
 class ForecasController: UIViewController {
     
-    var dataController : DataController!
     @IBOutlet weak var asd2: UILabel!
     
     override func viewDidLoad() {

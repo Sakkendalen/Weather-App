@@ -13,7 +13,7 @@ import CoreLocation
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
-    var dataCont : DataController?
+    //var dataCont : DataController?
     var locationManager : CLLocationManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -24,12 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let curController = tabController.viewControllers![0] as! CurrentWeatherController
         let foreController = tabController.viewControllers![1] as! ForecasController
         let cityController = tabController.viewControllers![2] as! CityController
- 
+        
+        /*
         dataCont = DataController()
         
         curController.dataController = self.dataCont
         foreController.dataController = self.dataCont
         cityController.dataController = self.dataCont
+         */
         
         self.locationManager!.delegate = self
         locationManager!.requestAlwaysAuthorization()
@@ -39,17 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let loc = locations.last
-        let lat = loc!.coordinate.latitude
-        let lon = loc!.coordinate.longitude
+        //let loc = locations.last
+        let lat = self.locationManager?.location!.coordinate.latitude
+        let lon = self.locationManager?.location!.coordinate.longitude
         print(lat)
         print(lon)
-        dataCont!.longitude = lon
-        dataCont!.latitude = lat
-        dataCont!.fethlocations()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0){
-            self.dataCont!.getWeather()
-        }
+        fecthUrl(url: "https://api.openweathermap.org/data/2.5/weather?lat=\(lat!)&lon=\(lon!)&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")
         self.locationManager!.stopUpdatingLocation()
     }
 
@@ -74,7 +71,93 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
+    func fecthUrl(url: String){
+        
+        let config = URLSessionConfiguration.default
+        
+        let session = URLSession(configuration: config)
+        
+        let url : URL? = URL(string: url)
+        
+        let task = session.dataTask(with: url!, completionHandler: doneFetching);
+        
+        // Starts the task, spawns a new thread and calls the callback function
+        task.resume();
+    }
+    
+    func doneFetching(data: Data?, response: URLResponse?, error: Error?) {
+        //let resstr = String(data: data!, encoding: String.Encoding.utf8)
+        
+        // Execute stuff in UI thread
+        DispatchQueue.main.async(execute: {() in
+            do{
+                let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
+                print(json)
+                let model = try JSONDecoder().decode(WeatherDataModel.self, from:data!)
+            } catch {
+                print(error)
+            }
+        })
+    }
+    /*
+    func getWeather(){
+        print("nopee")
+        let session = URLSession.shared
+        HOX!!! PLACEHOLDER CUPERTINO!!
+        let weatherURL = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=California,us&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")!
+        let dataTask = session.dataTask(with: weatherURL) {
+            (data: Data?, response: URLResponse?, error: Error?) in
+            if let error = error {
+                print("Error:\n\(error)")
+            } else {
+                if let data = data {
+                    let dataString = String(data: data, encoding: String.Encoding.utf8)
+                    print("All the weather data:\n\(dataString!)")
+                    if let jsonObj = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
+                        if let mainDictionary = jsonObj!.value(forKey: "main") as? NSDictionary {
+                            if let temperature = mainDictionary.value(forKey: "temp") {
+                                DispatchQueue.main.async {
+                                    self.temp = "\(temperature)"
+                                }
+                            }
+                        } else {
+                            print("Error: unable to find temperature in dictionary")
+                        }
+                    } else {
+                        print("Error: unable to convert json data")
+                    }
+                } else {
+                    print("Error: did not receive data")
+                }
+            }
+        }
+        dataTask.resume()
+ 
+    }
+    
+    func fethlocations(){
+        
+        let location = CLLocation(latitude: 0.0, longitude: 0.0)
+        
+        CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
+            
+            if error != nil {
+                print("Reverse geocoder failed with error" + error!.localizedDescription)
+                return
+            }
+            
+            if placemarks!.count > 0 {
+                let pm = placemarks![0]
+                let locString : String = pm.locality!
+                //self.loc = locString
+                print(locString)
+            }
+            else {
+                print("Problem with the data received from geocoder")
+            }})
+    }
+ */
 
 }
 
