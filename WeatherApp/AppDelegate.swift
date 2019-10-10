@@ -15,15 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var window: UIWindow?
     //var dataCont : DataController?
     var locationManager : CLLocationManager?
+    var curController : CurrentWeatherController?
+    var foreController : ForecasController?
+    var cityController : CityController?
+    
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         self.locationManager = CLLocationManager()
         let tabController = window?.rootViewController as! UITabBarController
         
-        let curController = tabController.viewControllers![0] as! CurrentWeatherController
-        let foreController = tabController.viewControllers![1] as! ForecasController
-        let cityController = tabController.viewControllers![2] as! CityController
+        curController = tabController.viewControllers![0] as! CurrentWeatherController
+        foreController = tabController.viewControllers![1] as! ForecasController
+        cityController = tabController.viewControllers![2] as! CityController
         
         /*
         dataCont = DataController()
@@ -93,13 +98,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         DispatchQueue.main.async(execute: {() in
             do{
                 let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
-                print(json)
+                //print(json)
                 let model = try JSONDecoder().decode(WeatherDataModel.self, from:data!)
+                //print(model)
+                self.passDatatoCurrent(model: model)
             } catch {
                 print(error)
             }
         })
     }
+    
+    func passDatatoCurrent(model: WeatherDataModel){
+        curController!.takeData(model: model)
+    }
+    
     /*
     func getWeather(){
         print("nopee")
