@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let lat = self.locationManager?.location!.coordinate.latitude
         let lon = self.locationManager?.location!.coordinate.longitude
         fecthUrl(url: "https://api.openweathermap.org/data/2.5/weather?lat=\(lat!)&lon=\(lon!)&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")
-        fecthUrl(url: "https://api.openweathermap.org/data/2.5/forecast?lat=\(lat!)&lon=\(lon!)&cnt=5&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")
+        fecthUrl(url: "https://api.openweathermap.org/data/2.5/forecast?lat=\(lat!)&lon=\(lon!)&cnt=40&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")
         self.locationManager!.stopUpdatingLocation()
     }
 
@@ -94,14 +94,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         // Execute stuff in UI thread
         if let resstr = String(data: data!, encoding: String.Encoding.utf8){
-            print(resstr)
+            //print(resstr)
             if resstr.contains("\"cod\":\"200\""){
                 do{
-                    print("forecast!!")
-                    let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
+                    //print("forecast!!")
+                    //let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
                     //print(json)
                     let model2 = try JSONDecoder().decode(FiveDayWeatherModel.self, from:data!)
-                    print(model2)
+                    DispatchQueue.main.async(execute: {() in
+                        self.foreController!.passData(model: model2)
+                    })
+                    //print(model2)
                 }catch{
                     print(error)
                 }
