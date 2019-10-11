@@ -18,6 +18,7 @@
 		99DDBA6B234DD76F00459AD8 /* ForecastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DDBA6A234DD76F00459AD8 /* ForecastController.swift */; };
 		99DDBA6D234DD77D00459AD8 /* CityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DDBA6C234DD77D00459AD8 /* CityController.swift */; };
 		99DDBA96234DDFCD00459AD8 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DDBA95234DDFCD00459AD8 /* DataController.swift */; };
+		99DEFF042350873900F17CD0 /* FiveDayWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DEFF032350873900F17CD0 /* FiveDayWeatherModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		99DDBA6A234DD76F00459AD8 /* ForecastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastController.swift; sourceTree = "<group>"; };
 		99DDBA6C234DD77D00459AD8 /* CityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityController.swift; sourceTree = "<group>"; };
 		99DDBA95234DDFCD00459AD8 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		99DEFF032350873900F17CD0 /* FiveDayWeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayWeatherModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				99DDBA68234DD75E00459AD8 /* CurrentWeatherController.swift */,
 				99DDBA6A234DD76F00459AD8 /* ForecastController.swift */,
 				99DDBA6C234DD77D00459AD8 /* CityController.swift */,
+				99DEFF032350873900F17CD0 /* FiveDayWeatherModel.swift */,
 				9912DC41234F1C3400FA4056 /* WeatherDataModel.swift */,
 			);
 			path = WeatherApp;
@@ -270,6 +273,7 @@
 			files = (
 				9912DC42234F1C3400FA4056 /* WeatherDataModel.swift in Sources */,
 				99DDBA96234DDFCD00459AD8 /* DataController.swift in Sources */,
+				99DEFF042350873900F17CD0 /* FiveDayWeatherModel.swift in Sources */,
 				99DDBA69234DD75E00459AD8 /* CurrentWeatherController.swift in Sources */,
 				99DDBA6B234DD76F00459AD8 /* ForecastController.swift in Sources */,
 				99DDBA6D234DD77D00459AD8 /* CityController.swift in Sources */,

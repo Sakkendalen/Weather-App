@@ -50,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let lat = self.locationManager?.location!.coordinate.latitude
         let lon = self.locationManager?.location!.coordinate.longitude
         fecthUrl(url: "https://api.openweathermap.org/data/2.5/weather?lat=\(lat!)&lon=\(lon!)&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")
+        fecthUrl(url: "https://api.openweathermap.org/data/2.5/forecast?lat=\(lat!)&lon=\(lon!)&cnt=5&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")
         self.locationManager!.stopUpdatingLocation()
     }
 
@@ -93,19 +94,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         // Execute stuff in UI thread
         if let resstr = String(data: data!, encoding: String.Encoding.utf8){
-            do{
-                _ = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
-                //print(json)
-                let model = try JSONDecoder().decode(WeatherDataModel.self, from:data!)
-                //print(model)
-                
-                self.fecthUrl(url: "https://openweathermap.org/img/wn/\(model.weather[0].icon)@2x.png")
-                
-                DispatchQueue.main.async(execute: {() in
-                    self.passDatatoCurrent(model: model)
-                })
-            }catch{
-                print(error)
+            print(resstr)
+            if resstr.contains("\"cod\":\"200\""){
+                do{
+                    print("forecast!!")
+                    let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
+                    //print(json)
+                    let model2 = try JSONDecoder().decode(FiveDayWeatherModel.self, from:data!)
+                    print(model2)
+                }catch{
+                    print(error)
+                }
+            }
+            else {
+                do{
+                    _ = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
+                    //print(json)
+                    let model = try JSONDecoder().decode(WeatherDataModel.self, from:data!)
+                    //print(model)
+                    
+                    self.fecthUrl(url: "https://openweathermap.org/img/wn/\(model.weather[0].icon)@2x.png")
+                    
+                    DispatchQueue.main.async(execute: {() in
+                        self.passDatatoCurrent(model: model)
+                    })
+                }catch{
+                    print(error)
+                }
             }
         } else if let image = UIImage(data: data!){
             DispatchQueue.main.async(execute: {() in
