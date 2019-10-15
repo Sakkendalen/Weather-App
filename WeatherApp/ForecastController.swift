@@ -36,15 +36,16 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCell(withIdentifier: "someID")
+        var cell = UITableViewCell()
         
         if(cell == nil){
-            cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "someID")
+            cell = tableView.dequeueReusableCell(withIdentifier: "myProtoCell") as! ForecastCell
+            //cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "myProtoCell")
         }
         
         //cell!.textLabel!.text = self.stuff[indexPath.row]
         
-        return cell!
+        return cell
     }
 
 }
