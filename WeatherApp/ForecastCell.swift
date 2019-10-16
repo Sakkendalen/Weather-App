@@ -10,19 +10,13 @@ import UIKit
 
 class ForecastCell : UITableViewCell {
     
+
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
     
     var imageCodeForAPI:String = ""
-    
-    //override func awakeFromNib() {
-    //    super.awakeFromNib()
-    //}
-    //override func setSelected(_ selected: Bool, animated: Bool) {
-    //    super.setSelected(selected, animated: animated)
-    //}
     
     func getImage(imgCode: String) {
         

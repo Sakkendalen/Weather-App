@@ -11,6 +11,7 @@ import UIKit
 class ForecasController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var stuff : [FiveDayWeatherModel] = []
+    var fiveDayWeatherArray: FiveDayWeatherModel?
 
     @IBOutlet weak var table: UITableView!
     
@@ -22,28 +23,50 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func passData(model: FiveDayWeatherModel){
-        stuff.append(model)
-        print(stuff)
+        fiveDayWeatherArray = model
+        //print(stuff)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NSLog("\(stuff[indexPath.row])")
+        //NSLog("\(stuff[indexPath.row])")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.stuff.count
+        if let count = self.fiveDayWeatherArray?.list.count {
+            print("COUNT")
+            return count
+        }
+        else {
+            print("array empty")
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = UITableViewCell()
+        let df = DateFormatter()
         
-        if(cell == nil){
-            cell = tableView.dequeueReusableCell(withIdentifier: "myProtoCell") as! ForecastCell
-            //cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "myProtoCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "myProtoCell", for: indexPath) as! ForecastCell
+        
+        //weather i.e rain
+        if let txt = self.fiveDayWeatherArray?.list[indexPath.row].weather[0].main {
+            cell.weatherLabel.text = txt
         }
-        
-        //cell!.textLabel!.text = self.stuff[indexPath.row]
+        //temperature
+        if let txt = self.fiveDayWeatherArray?.list[indexPath.row].main.temp {
+            let txt2 = String(format: "%.1f", txt)
+            cell.weatherLabel.text = (cell.weatherLabel.text!) + "  \(txt2) °C"
+        }
+        //icon
+        if let txt = self.fiveDayWeatherArray?.list[indexPath.row].weather[0].icon {
+            cell.getImage(imgCode: txt)
+        }
+        //date
+        if let txt = self.fiveDayWeatherArray?.list[indexPath.row].dt {
+            df.dateFormat = "yyyy-MM-dd hh:mm:ss"
+            let now = df.string(from: txt)
+            cell.dateLabel.text = now
+        }
         
         return cell
     }

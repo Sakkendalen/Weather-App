@@ -10,13 +10,14 @@ import Foundation
 
 struct FiveDayWeatherModel : Codable {
     let list : [FiveDayWeatherList]
+    var cod: String
 }
 
 struct FiveDayWeatherList : Codable {
+    //let dt_Txt : String
     let dt : Date
     let main : FiveDayMain
     let weather : [FiveDayWeather]
-    //let dt_Txt : String
 }
 
 struct FiveDayWeather : Codable {
