@@ -24,11 +24,26 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
     
     override func encodeRestorableState(with coder: NSCoder) {
         
+        print("Encode foreCast")
+        
+        coder.encode(self.stuff, forKey: "weathArray")
+        
+        super.encodeRestorableState(with: coder)
     }
     
     override func decodeRestorableState(with coder: NSCoder) {
         
+        print("Decode ForeCast")
+        
+        let weatherStuff = coder.decodeObject(forKey: "weathArray") as? Array<Any>
+        
+        if let model = weatherStuff {
+            self.stuff = model as! [FiveDayWeatherModel]
+        }
+        
+        super.decodeRestorableState(with: coder)
     }
+ 
     
     func passData(model: FiveDayWeatherModel){
         fiveDayWeatherArray = model

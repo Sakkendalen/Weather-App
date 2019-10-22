@@ -13,7 +13,7 @@
         <!--Current-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="CurrentWeatherController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="currentCont" id="BYZ-38-t0r" customClass="CurrentWeatherController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,7 +72,7 @@
         <!--Forecast-->
         <scene sceneID="CpN-vA-di9">
             <objects>
-                <viewController id="nlu-CJ-5yw" customClass="ForecasController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="forecastCont" id="nlu-CJ-5yw" customClass="ForecasController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j2l-Z5-rdq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -151,7 +151,7 @@
         <!--City-->
         <scene sceneID="Nyv-5q-oNZ">
             <objects>
-                <viewController id="St4-EK-GDm" customClass="CityController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="cityCont" id="St4-EK-GDm" customClass="CityController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cwG-3l-Ina">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -182,7 +182,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="WT2-Jk-Nxq">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="33U-SJ-mw9" sceneMemberID="viewController">
+                <tabBarController restorationIdentifier="rootTabBarCont" automaticallyAdjustsScrollViewInsets="NO" id="33U-SJ-mw9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4Ff-DZ-jbF">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

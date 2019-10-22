@@ -24,6 +24,9 @@ class CurrentWeatherController: UIViewController {
     }
     
     override func encodeRestorableState(with coder: NSCoder) {
+        
+        print("Decode Current")
+        
         coder.encode(self.place.text, forKey: "placeName")
         coder.encode(self.temperature.text, forKey: "temp")
         coder.encode(self.desc.text, forKey: "description")
@@ -33,6 +36,9 @@ class CurrentWeatherController: UIViewController {
     }
     
     override func decodeRestorableState(with coder: NSCoder) {
+        
+        print("Decode Current")
+        
         let place = coder.decodeObject(forKey: "placeName") as? String
         let temp = coder.decodeObject(forKey: "temp") as? String
         let desc = coder.decodeObject(forKey: "description") as? String

@@ -22,11 +22,20 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     override func encodeRestorableState(with coder: NSCoder) {
+        coder.encode(self.stuff, forKey: "stuff")
         
+        super.encodeRestorableState(with: coder)
     }
     
     override func decodeRestorableState(with coder: NSCoder) {
+        let weatherStuff = coder.decodeObject(forKey: "weathArray") as? Array<Any>
         
+        //HOX HOX
+        if let model = weatherStuff {
+            self.stuff = model as! [String]
+        }
+        
+        super.decodeRestorableState(with: coder)
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
