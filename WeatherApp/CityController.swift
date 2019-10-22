@@ -24,46 +24,38 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     override func encodeRestorableState(with coder: NSCoder) {
-        coder.encode(self.stuff, forKey: "stuff")
+        
+        //save array to userdefaults
+        UserDefaults.standard.set(stuff, forKey: "myStuff")
         
         super.encodeRestorableState(with: coder)
     }
     
     override func decodeRestorableState(with coder: NSCoder) {
-        let weatherStuff = coder.decodeObject(forKey: "weathArray") as? Array<Any>
         
-        //HOX HOX
-        if let model = weatherStuff {
-            self.stuff = model as! [String]
+        //fetch and check array from userdefaults and assign them to stuff Array
+        if let defList = UserDefaults.standard.stringArray(forKey: "mystuff"){
+            stuff = defList
         }
         
         super.decodeRestorableState(with: coder)
     }
     @IBAction func addCity(_ sender: Any) {
         if cityTextField.text != nil {
-            self.stuff.append(cityTextField.text!)
-            print("Should add city")
-            table.reloadData()
-        }
-        else{
-            print("Can't add city")
+            if !stuff.contains(cityTextField.text!){
+                self.stuff.append(cityTextField.text!)
+                table.reloadData()
+                cityTextField.text = ""
+            }
         }
     }
     
     @IBAction func removeCity(_ sender: Any) {
-        
         if selectedCity != nil{
             if selectedCity != 0 {
                 stuff.remove(at: selectedCity!)
-                print("Should Remove city")
                 table.reloadData()
             }
-            else{
-                print("GPS selected cannot delete")
-            }
-        }
-        else{
-            print("no row selected")
         }
     }
     
