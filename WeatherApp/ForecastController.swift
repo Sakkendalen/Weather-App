@@ -33,6 +33,7 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
         
         if let defList = UserDefaults.standard.object(forKey: "forecastArray"){
             stuff = defList as! [FiveDayWeatherModel]
+            table.reloadData()
         }
         
         super.decodeRestorableState(with: coder)

@@ -28,6 +28,11 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
         //save array to userdefaults
         UserDefaults.standard.set(stuff, forKey: "myStuff")
         
+        //save cityTextField
+        if let text = self.cityTextField.text {
+            coder.encode(text, forKey: "cityInput")
+        }
+        
         super.encodeRestorableState(with: coder)
     }
     
@@ -36,6 +41,11 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
         //fetch and check array from userdefaults and assign them to stuff Array
         if let defList = UserDefaults.standard.stringArray(forKey: "mystuff"){
             stuff = defList
+        }
+        
+        //fetch inputfield and put string to cityTextField
+        if let input = coder.decodeObject(forKey: "cityInput"){
+            self.cityTextField.text = input as? String
         }
         
         super.decodeRestorableState(with: coder)
