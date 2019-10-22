@@ -10,9 +10,11 @@ import UIKit
 
 class CityController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var cityTextField: UITextField!
     var stuff = ["Use GPS", "Helsinki", "Tampere", "Turku"]
 
     @IBOutlet weak var table: UITableView!
+    var selectedCity : Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,9 +39,38 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         super.decodeRestorableState(with: coder)
     }
-
+    @IBAction func addCity(_ sender: Any) {
+        if cityTextField.text != nil {
+            self.stuff.append(cityTextField.text!)
+            print("Should add city")
+            table.reloadData()
+        }
+        else{
+            print("Can't add city")
+        }
+    }
+    
+    @IBAction func removeCity(_ sender: Any) {
+        
+        if selectedCity != nil{
+            if selectedCity != 0 {
+                stuff.remove(at: selectedCity!)
+                print("Should Remove city")
+                table.reloadData()
+            }
+            else{
+                print("GPS selected cannot delete")
+            }
+        }
+        else{
+            print("no row selected")
+        }
+    }
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //NSLog("\(stuff[indexPath.row])")
+        NSLog("\(indexPath.row)")
+        selectedCity = indexPath.row
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

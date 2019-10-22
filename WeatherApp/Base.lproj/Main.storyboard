@@ -157,21 +157,53 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0T2-Ye-IoQ">
-                                <rect key="frame" x="10" y="30" width="394" height="647"/>
+                                <rect key="frame" x="20" y="40" width="374" height="347"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3fA-h7-jeh">
+                                <rect key="frame" x="132" y="407" width="150" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="5k4-lK-rra"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4e3-c8-CZP">
+                                <rect key="frame" x="177.66666666666666" y="457" width="59" height="30"/>
+                                <state key="normal" title="Add City"/>
+                                <connections>
+                                    <action selector="addCity:" destination="St4-EK-GDm" eventType="touchUpInside" id="lPv-HX-yCz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyG-lV-fNn">
+                                <rect key="frame" x="164" y="507" width="86" height="30"/>
+                                <state key="normal" title="Remove City"/>
+                                <connections>
+                                    <action selector="removeCity:" destination="St4-EK-GDm" eventType="touchUpInside" id="Ogw-ks-E0N"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="8Sn-Rd-5jj" firstAttribute="bottom" secondItem="0T2-Ye-IoQ" secondAttribute="bottom" constant="10" id="RD1-md-mw8"/>
-                            <constraint firstItem="0T2-Ye-IoQ" firstAttribute="top" secondItem="8Sn-Rd-5jj" secondAttribute="top" constant="10" id="VAe-oh-RQO"/>
-                            <constraint firstItem="8Sn-Rd-5jj" firstAttribute="trailing" secondItem="0T2-Ye-IoQ" secondAttribute="trailing" constant="10" id="dhj-KF-DKg"/>
-                            <constraint firstItem="0T2-Ye-IoQ" firstAttribute="leading" secondItem="8Sn-Rd-5jj" secondAttribute="leading" constant="10" id="jqv-sZ-UBl"/>
+                            <constraint firstItem="4e3-c8-CZP" firstAttribute="centerX" secondItem="cwG-3l-Ina" secondAttribute="centerX" id="Fc6-QF-rY1"/>
+                            <constraint firstItem="0T2-Ye-IoQ" firstAttribute="leading" secondItem="8Sn-Rd-5jj" secondAttribute="leading" constant="20" id="GbN-R9-xe4"/>
+                            <constraint firstItem="3fA-h7-jeh" firstAttribute="top" secondItem="0T2-Ye-IoQ" secondAttribute="bottom" constant="20" id="Kia-5x-RI1"/>
+                            <constraint firstItem="4e3-c8-CZP" firstAttribute="top" secondItem="3fA-h7-jeh" secondAttribute="bottom" constant="20" id="QKX-EQ-MC5"/>
+                            <constraint firstItem="0T2-Ye-IoQ" firstAttribute="top" secondItem="8Sn-Rd-5jj" secondAttribute="top" constant="20" id="V7S-a6-4kx"/>
+                            <constraint firstItem="8Sn-Rd-5jj" firstAttribute="trailing" secondItem="0T2-Ye-IoQ" secondAttribute="trailing" constant="20" id="VGk-Qd-YNF"/>
+                            <constraint firstItem="xyG-lV-fNn" firstAttribute="top" secondItem="4e3-c8-CZP" secondAttribute="bottom" constant="20" id="Yp2-n3-Y2H"/>
+                            <constraint firstItem="xyG-lV-fNn" firstAttribute="centerX" secondItem="cwG-3l-Ina" secondAttribute="centerX" id="hbK-m3-fub"/>
+                            <constraint firstItem="0T2-Ye-IoQ" firstAttribute="top" secondItem="8Sn-Rd-5jj" secondAttribute="top" constant="20" id="n9r-Ll-aNC"/>
+                            <constraint firstItem="3fA-h7-jeh" firstAttribute="centerX" secondItem="cwG-3l-Ina" secondAttribute="centerX" id="owH-K5-tGp"/>
+                            <constraint firstItem="0T2-Ye-IoQ" firstAttribute="centerX" secondItem="cwG-3l-Ina" secondAttribute="centerX" id="wrY-v5-Ns2"/>
+                            <constraint firstItem="8Sn-Rd-5jj" firstAttribute="bottom" secondItem="xyG-lV-fNn" secondAttribute="bottom" constant="150" id="zyA-eK-Wyo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8Sn-Rd-5jj"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="City" id="l03-LD-AtK"/>
                     <connections>
+                        <outlet property="cityTextField" destination="3fA-h7-jeh" id="hnr-8S-jiW"/>
                         <outlet property="table" destination="0T2-Ye-IoQ" id="Gvh-YB-Pjz"/>
                     </connections>
                 </viewController>
