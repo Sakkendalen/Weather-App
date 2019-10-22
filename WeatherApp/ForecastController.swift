@@ -22,6 +22,14 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    override func encodeRestorableState(with coder: NSCoder) {
+        
+    }
+    
+    override func decodeRestorableState(with coder: NSCoder) {
+        
+    }
+    
     func passData(model: FiveDayWeatherModel){
         fiveDayWeatherArray = model
         //print(stuff)
@@ -33,11 +41,11 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let count = self.fiveDayWeatherArray?.list.count {
-            print("COUNT")
+            //print("COUNT")
             return count
         }
         else {
-            print("array empty")
+            //print("array empty")
             return 0
         }
     }

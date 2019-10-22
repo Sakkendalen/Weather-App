@@ -10,7 +10,7 @@ import UIKit
 
 class CityController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var stuff = ["3","4"]
+    var stuff = ["Use GPS", "Helsinki", "Tampere", "Turku"]
 
     @IBOutlet weak var table: UITableView!
     
@@ -20,9 +20,17 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.table.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
+    
+    override func encodeRestorableState(with coder: NSCoder) {
+        
+    }
+    
+    override func decodeRestorableState(with coder: NSCoder) {
+        
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NSLog("\(stuff[indexPath.row])")
+        //NSLog("\(stuff[indexPath.row])")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
