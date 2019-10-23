@@ -88,8 +88,10 @@ class CurrentWeatherController: UIViewController {
             
         }
         else {
+            let str = command
+            let replaced = str.replacingOccurrences(of: " ", with: "+")
             self.place.text = command
-            dataController!.fetchWeather(url: "https://api.openweathermap.org/data/2.5/weather?q=\(command)&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2",cont: self)
+            dataController!.fetchWeather(url: "https://api.openweathermap.org/data/2.5/weather?q=\(replaced)&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2",cont: self)
         }
     }
     

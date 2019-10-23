@@ -11,7 +11,7 @@ import UIKit
 class CityController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var cityTextField: UITextField!
-    var stuff = ["Use GPS", "Helsinki", "Tampere", "Turku"]
+    var stuff = ["Use GPS"]
 
     @IBOutlet weak var table: UITableView!
     var selectedCity : Int?
@@ -29,11 +29,11 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    /*
     override func encodeRestorableState(with coder: NSCoder) {
         
         //save array to userdefaults
         UserDefaults.standard.set(stuff, forKey: "myStuff")
+        print(stuff)
         
         //save cityTextField
         if let text = self.cityTextField.text {
@@ -46,8 +46,10 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func decodeRestorableState(with coder: NSCoder) {
         
         //fetch and check array from userdefaults and assign them to stuff Array
-        if let defList = UserDefaults.standard.stringArray(forKey: "mystuff"){
+        if let defList = UserDefaults.standard.stringArray(forKey: "myStuff"){
+            print(defList)
             stuff = defList
+            table.reloadData()
         }
         
         //fetch inputfield and put string to cityTextField
@@ -57,7 +59,6 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         super.decodeRestorableState(with: coder)
     }
- */
     
     @IBAction func addCity(_ sender: Any) {
         if cityTextField.text != nil {
@@ -80,7 +81,7 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NSLog("\(indexPath.row)")
+        //SLog("\(indexPath.row)")
         selectedCity = indexPath.row
         dataController?.locationChanged(command: "\(stuff[indexPath.row])")
     }

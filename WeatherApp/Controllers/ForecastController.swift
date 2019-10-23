@@ -62,7 +62,9 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
             dataController!.fetchForecast(url: "https://api.openweathermap.org/data/2.5/forecast?lat=\(location!.latitude)&lon=\(location!.longitude)&cnt=40&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2",cont: self)
         }
         else {
-            dataController!.fetchForecast(url: "https://api.openweathermap.org/data/2.5/forecast?q=\(command)&cnt=40&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2",cont: self)
+            let str = command
+            let replaced = str.replacingOccurrences(of: " ", with: "+")
+            dataController!.fetchForecast(url: "https://api.openweathermap.org/data/2.5/forecast?q=\(replaced)&cnt=40&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2",cont: self)
         }
     }
     
