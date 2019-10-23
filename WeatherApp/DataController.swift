@@ -5,160 +5,109 @@
 //  Created by Saku Tynjälä on 08/10/2019.
 //  Copyright © 2019 Saku Tynjälä. All rights reserved.
 //
-/*
-import Foundation
-import CoreLocation
+
+import UIKit
 
 class DataController {
     
-    var latitude : Double?
-    var longitude : Double?
-    var temp : String?
-    var loc : String?
+    var curController : CurrentWeatherController?
+    var forController : ForecasController?
     
-    init() {
+    
+    init(){
         
     }
     
-    func getWeather(){
-        print("nopee")
-        let latInt : Double = self.latitude!
-        let lonInt : Double = self.longitude!
-        print(latInt)
-        let session = URLSession.shared
-        //HOX!!! PLACEHOLDER CUPERTINO!!
-        let weatherURL = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=California,us&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")!
-        let dataTask = session.dataTask(with: weatherURL) {
-            (data: Data?, response: URLResponse?, error: Error?) in
-            if let error = error {
-                print("Error:\n\(error)")
-            } else {
-                if let data = data {
-                    let dataString = String(data: data, encoding: String.Encoding.utf8)
-                    print("All the weather data:\n\(dataString!)")
-                    if let jsonObj = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
-                        if let mainDictionary = jsonObj!.value(forKey: "main") as? NSDictionary {
-                            if let temperature = mainDictionary.value(forKey: "temp") {
-                                DispatchQueue.main.async {
-                                    self.temp = "\(temperature)"
-                                }
-                            }
-                        } else {
-                            print("Error: unable to find temperature in dictionary")
-                        }
-                    } else {
-                        print("Error: unable to convert json data")
-                    }
-                } else {
-                    print("Error: did not receive data")
+    func fetchWeather(url : String, cont: CurrentWeatherController){
+        
+        curController = cont
+        
+        fecthUrl(url: url)
+        
+        
+    }
+    
+    func fetchForecast(url : String, cont: ForecasController){
+        
+        forController = cont
+        
+        fecthUrl(url: url)
+        
+    }
+    
+    func locationChanged(command: String){
+        curController?.changeLocation(command: command)
+        forController?.changeLocation(command: command)
+        
+    }
+    
+    func fecthUrl(url: String){
+        
+        //print("fetch")
+        
+        let config = URLSessionConfiguration.default
+        
+        let session = URLSession(configuration: config)
+        
+        let url : URL? = URL(string: url)
+        
+        let task = session.dataTask(with: url!, completionHandler: doneFetching);
+        
+        // Starts the task, spawns a new thread and calls the callback function
+        task.resume();
+    }
+    
+    func doneFetching(data: Data?, response: URLResponse?, error: Error?) {
+        
+        // Execute stuff in UI thread
+        if let resstr = String(data: data!, encoding: String.Encoding.utf8){
+
+            //FORECAST
+            if resstr.contains("\"cod\":\"200\""){
+                do{
+                    print("HEPHEP!")
+                    let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
+                    print(json)
+                    let model = try JSONDecoder().decode(FiveDayWeatherModel.self, from:data!)
+                    //print(model)
+                    DispatchQueue.main.async(execute: {() in
+                        //self.foreController!.passData(model: model2)
+                        self.forController?.fiveDayWeatherArray = model
+                    })
+                    //print(model2)
+                }catch{
+                    print(error)
                 }
             }
-        }
-        dataTask.resume()
-    }
-    
-    func fethlocations(){
-        
-        let location = CLLocation(latitude: self.latitude!, longitude: self.longitude!)
-        
-        CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
-            
-            if error != nil {
-                print("Reverse geocoder failed with error" + error!.localizedDescription)
-                return
-            }
-            
-            if placemarks!.count > 0 {
-                let pm = placemarks![0]
-                let locString : String = pm.locality!
-                self.loc = locString
-                print(locString)
-            }
+                
+            //CURRENT
             else {
-                print("Problem with the data received from geocoder")
-            }})
+                do{
+                    //let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
+                    //print(json)
+                    let model = try JSONDecoder().decode(WeatherDataModel.self, from:data!)
+                    //print(model)
+                    
+                    self.fetchWeather(url: "https://openweathermap.org/img/wn/\(model.weather[0].icon)@2x.png", cont: curController!)
+                    
+                    DispatchQueue.main.async(execute: {() in
+                        
+                        //Assign data to curController attributes
+                        self.curController!.desc.text = model.weather[0].description
+                        let formatted = String(format: "%.1f", model.main.temp)
+                        self.curController!.temperature.text = "  \(formatted) °C"
+                        
+                    })
+                }catch{
+                    print(error)
+                }
+            }
+        } else if let image = UIImage(data: data!){
+            DispatchQueue.main.async(execute: {() in
+                
+                self.curController!.image.image = image
+                
+            })
+        }
     }
-    
 }
- //
- //  ViewController.swift
- //  WeatherApp
- //
- //  Created by Saku Tynjälä on 08/10/2019.
- //  Copyright © 2019 Saku Tynjälä. All rights reserved.
- //
- 
- import Foundation
- import CoreLocation
- 
- class DataController {
- 
- var latitude : Double
- var longitude : Double
- var place : String?
- 
- init() {
- latitude = 0.0
- longitude = 0.0
- }
- 
- func getWeather() -> String{
- let session = URLSession.shared
- //Hox! Atlanta!!
- let weatherURL = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=Atlanta,us?&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")!
- let dataTask = session.dataTask(with: weatherURL) {
- (data: Data?, response: URLResponse?, error: Error?) in
- if let error = error {
- print("Error:\n\(error)")
- } else {
- if let data = data {
- let dataString = String(data: data, encoding: String.Encoding.utf8)
- print("All the weather data:\n\(dataString!)")
- if let jsonObj = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
- if let mainDictionary = jsonObj!.value(forKey: "main") as? NSDictionary {
- if let temperature = mainDictionary.value(forKey: "temp") {
- DispatchQueue.main.async {
- return temperature
- }
- }
- } else {
- print("Error: unable to find temperature in dictionary")
- }
- } else {
- print("Error: unable to convert json data")
- }
- } else {
- print("Error: did not receive data")
- }
- }
- }
- dataTask.resume()
- return ""
- }
- 
- func fethlocations() {
- 
- print("1\(self.latitude)")
- print("1\(self.longitude)")
- 
- let location = CLLocation(latitude: self.latitude, longitude: self.longitude)
- 
- CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
- 
- if error != nil {
- print("Reverse geocoder failed with error" + error!.localizedDescription)
- return
- }
- 
- if placemarks!.count > 0 {
- let pm = placemarks![0]
- self.place = pm.locality
- //print("\(pm.locality!)")
- }
- else {
- print("Problem with the data received from geocoder")
- }})
- }
- 
- }
-*/

@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ForecasController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var stuff : [FiveDayWeatherModel] = []
     var fiveDayWeatherArray: FiveDayWeatherModel?
+    
+    var dataController : DataController?
+    var geoCoder = CLGeocoder()
+    var location : CLLocationCoordinate2D?
 
     @IBOutlet weak var table: UITableView!
     
@@ -22,6 +27,11 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        table.reloadData()
+    }
+    
+    /*
     override func encodeRestorableState(with coder: NSCoder) {
         
         UserDefaults.standard.set(stuff, forKey: "forecastArray")
@@ -38,11 +48,22 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
         
         super.decodeRestorableState(with: coder)
     }
- 
+ */
     
-    func passData(model: FiveDayWeatherModel){
-        fiveDayWeatherArray = model
-        //print(stuff)
+    func setLocation(loc : CLLocationCoordinate2D){
+        
+        self.location = loc
+        
+        dataController!.fetchForecast(url: "https://api.openweathermap.org/data/2.5/forecast?lat=\(loc.latitude)&lon=\(loc.longitude)&cnt=40&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2",cont: self)
+    }
+    
+    func changeLocation(command: String){
+        if(command == "Use GPS") {
+            dataController!.fetchForecast(url: "https://api.openweathermap.org/data/2.5/forecast?lat=\(location!.latitude)&lon=\(location!.longitude)&cnt=40&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2",cont: self)
+        }
+        else {
+            dataController!.fetchForecast(url: "https://api.openweathermap.org/data/2.5/forecast?q=\(command)&cnt=40&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2",cont: self)
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -80,9 +101,9 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
             cell.getImage(imgCode: txt)
         }
         //date
-        if let txt = self.fiveDayWeatherArray?.list[indexPath.row].dt {
+        if let txt = self.fiveDayWeatherArray?.list[indexPath.row].dt_txt {
             df.dateFormat = "yyyy-MM-dd hh:mm:ss"
-            let now = df.string(from: txt)
+            let now = self.fiveDayWeatherArray?.list[indexPath.row].dt_txt
             cell.dateLabel.text = now
         }
         

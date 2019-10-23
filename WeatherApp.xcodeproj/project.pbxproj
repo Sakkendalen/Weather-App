@@ -115,12 +115,8 @@
 				992A1024234CB12C00D1A6CF /* Assets.xcassets */,
 				992A1026234CB12C00D1A6CF /* LaunchScreen.storyboard */,
 				992A1029234CB12C00D1A6CF /* Info.plist */,
-				99DDBA68234DD75E00459AD8 /* CurrentWeatherController.swift */,
-				99DDBA6A234DD76F00459AD8 /* ForecastController.swift */,
-				99DDBA6C234DD77D00459AD8 /* CityController.swift */,
-				99DEFF032350873900F17CD0 /* FiveDayWeatherModel.swift */,
-				9912DC41234F1C3400FA4056 /* WeatherDataModel.swift */,
-				99BC61892355BF7400DC3C62 /* ForecastCell.swift */,
+				99BF82C923604907005B7AE1 /* Controllers */,
+				99BF82CA23604912005B7AE1 /* DataModels */,
 			);
 			path = WeatherApp;
 			sourceTree = "<group>";
@@ -141,6 +137,26 @@
 				992A103F234CB12D00D1A6CF /* Info.plist */,
 			);
 			path = WeatherAppUITests;
+			sourceTree = "<group>";
+		};
+		99BF82C923604907005B7AE1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				99DDBA68234DD75E00459AD8 /* CurrentWeatherController.swift */,
+				99DDBA6A234DD76F00459AD8 /* ForecastController.swift */,
+				99DDBA6C234DD77D00459AD8 /* CityController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		99BF82CA23604912005B7AE1 /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				99DEFF032350873900F17CD0 /* FiveDayWeatherModel.swift */,
+				9912DC41234F1C3400FA4056 /* WeatherDataModel.swift */,
+				99BC61892355BF7400DC3C62 /* ForecastCell.swift */,
+			);
+			path = DataModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

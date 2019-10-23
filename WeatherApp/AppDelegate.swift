@@ -13,30 +13,36 @@ import CoreLocation
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
-    //var dataCont : DataController?
+    
+    var dataCont : DataController?
+    
     var locationManager : CLLocationManager?
+    
     var curController : CurrentWeatherController?
     var foreController : ForecasController?
     var cityController : CityController?
     
-    
+    var geoCod = CLGeocoder()
+    var locations : CLLocationCoordinate2D?
+    var location : CLLocation?
+    var placeMark: CLPlacemark?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        self.locationManager = CLLocationManager()
+        
         let tabController = window?.rootViewController as! UITabBarController
         
         curController = tabController.viewControllers![0] as! CurrentWeatherController
         foreController = tabController.viewControllers![1] as! ForecasController
         cityController = tabController.viewControllers![2] as! CityController
         
-        /*
         dataCont = DataController()
         
-        curController.dataController = self.dataCont
-        foreController.dataController = self.dataCont
-        cityController.dataController = self.dataCont
-         */
+        curController?.dataController = self.dataCont
+        foreController?.dataController = self.dataCont
+        cityController?.dataController = self.dataCont
+        
+        self.locationManager = CLLocationManager()
         
         self.locationManager!.delegate = self
         locationManager!.requestAlwaysAuthorization()
@@ -49,8 +55,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         //let loc = locations.last
         let lat = self.locationManager?.location!.coordinate.latitude
         let lon = self.locationManager?.location!.coordinate.longitude
-        fecthUrl(url: "https://api.openweathermap.org/data/2.5/weather?lat=\(lat!)&lon=\(lon!)&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")
-        fecthUrl(url: "https://api.openweathermap.org/data/2.5/forecast?lat=\(lat!)&lon=\(lon!)&cnt=40&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")
+        //fecthUrl(url: "https://api.openweathermap.org/data/2.5/weather?lat=\(lat!)&lon=\(lon!)&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")
+        //fecthUrl(url: "https://api.openweathermap.org/data/2.5/forecast?lat=\(lat!)&lon=\(lon!)&cnt=40&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")
+        
+        self.locations = self.locationManager?.location?.coordinate
+        self.location = CLLocation(latitude: (self.locations?.latitude)!, longitude: (self.locations?.longitude)!)
+        geoCod.reverseGeocodeLocation(location!, completionHandler: {(placemarks, error) -> Void in
+            var place: CLPlacemark!
+            place = placemarks?[0]
+            self.placeMark = placemarks?[0]
+            self.curController?.setLocation(loc: self.locations!, place: place)
+            self.foreController?.setLocation(loc: self.locations!)
+        })
+        
         self.locationManager!.stopUpdatingLocation()
     }
     
@@ -83,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
+    /*
     func fecthUrl(url: String){
         
         let config = URLSessionConfiguration.default
@@ -97,6 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         // Starts the task, spawns a new thread and calls the callback function
         task.resume();
     }
+    
     
     func doneFetching(data: Data?, response: URLResponse?, error: Error?) {
         
@@ -148,7 +166,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         curController!.takeImage(image: image)
     }
     
-    /*
+    
     func getWeather(){
         print("nopee")
         let session = URLSession.shared

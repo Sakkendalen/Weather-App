@@ -16,6 +16,8 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var table: UITableView!
     var selectedCity : Int?
     
+    var dataController : DataController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.table.dataSource = self
@@ -23,6 +25,11 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
+    
+    /*
     override func encodeRestorableState(with coder: NSCoder) {
         
         //save array to userdefaults
@@ -50,6 +57,8 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         super.decodeRestorableState(with: coder)
     }
+ */
+    
     @IBAction func addCity(_ sender: Any) {
         if cityTextField.text != nil {
             if !stuff.contains(cityTextField.text!){
@@ -73,6 +82,7 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("\(indexPath.row)")
         selectedCity = indexPath.row
+        dataController?.locationChanged(command: "\(stuff[indexPath.row])")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
