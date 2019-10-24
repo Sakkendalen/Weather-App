@@ -35,7 +35,6 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //save array to userdefaults
         UserDefaults.standard.set(stuff, forKey: "myStuff")
-        print(stuff)
         
         //save cityTextField
         if let text = self.cityTextField.text {

@@ -34,6 +34,7 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
     override func encodeRestorableState(with coder: NSCoder) {
         
         UserDefaults.standard.set(stuff, forKey: "forecastArray")
+        UserDefaults.standard.synchronize()
         
         super.encodeRestorableState(with: coder)
     }
@@ -57,10 +58,8 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func changeLocation(command: String){
         if(command == "Use GPS") {
-            locationManager?.startUpdatingLocation()
-            /*
-            dataController!.fetchForecast(url: "https://api.openweathermap.org/data/2.5/forecast?lat=\(location!.latitude)&lon=\(location!.longitude)&cnt=40&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2",cont: self)
-            */
+            
+            //locationManager?.startUpdatingLocation()
         }
         else {
             let str = command

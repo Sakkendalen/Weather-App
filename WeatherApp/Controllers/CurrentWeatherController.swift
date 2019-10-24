@@ -68,20 +68,6 @@ class CurrentWeatherController: UIViewController {
     func changeLocation(command: String){
         if(command == "Use GPS") {
             locationManager?.startUpdatingLocation()
-            /*
-            let locTest = CLLocation(latitude: self.location!.latitude, longitude: self.location!.longitude)
-            
-            geoCoder.reverseGeocodeLocation(locTest, completionHandler: { (placemarks, error) -> Void in
-
-                var placeMark: CLPlacemark!
-                placeMark = placemarks?[0]
-
-                self.place.text = placeMark.locality!
-            })
-            
-            dataController!.fetchWeather(url: "https://api.openweathermap.org/data/2.5/weather?lat=\(location!.latitude)&lon=\(location!.longitude)&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2",cont: self)
-            */
-            
         }
         else {
             let str = command

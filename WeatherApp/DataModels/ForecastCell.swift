@@ -25,13 +25,11 @@ class ForecastCell : UITableViewCell {
         if (UserDefaults.standard.data(forKey: imgCode) != nil) {
             //load from userDefaults
             
-            //print("should load from userdef")
             let img = UserDefaults.standard.data(forKey: imgCode)
             let img2 = UIImage(data: img!)
             self.cellImage.image = img2
         }
         else {
-            //print("fetch from internets")
             fetchImage(imgcode: imgCode)
         }
     }
@@ -49,8 +47,7 @@ class ForecastCell : UITableViewCell {
     func doneFetchingImage(data: Data?, response: URLResponse?, error: Error?) {
         DispatchQueue.main.async(execute: {() in
             
-            print("Should save to userdef")
-            let def = UserDefaults.standard   //UserDefaults kokeilu
+            let def = UserDefaults.standard
             def.set(data, forKey: self.imageCodeForAPI)
             def.synchronize()
             

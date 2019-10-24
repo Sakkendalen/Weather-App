@@ -43,8 +43,6 @@ class DataController {
     
     func fecthUrl(url: String){
         
-        //print("fetch")
-        
         let config = URLSessionConfiguration.default
         
         let session = URLSession(configuration: config)
@@ -65,15 +63,14 @@ class DataController {
             //FORECAST
             if resstr.contains("\"cod\":\"200\""){
                 do{
-                    //let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
-                    //print(json)
+                    
                     let model = try JSONDecoder().decode(FiveDayWeatherModel.self, from:data!)
-                    //print(model)
+                    
+                    //Assign model to forecastcontroller fiveDayWeatherArray
                     DispatchQueue.main.async(execute: {() in
-                        //self.foreController!.passData(model: model2)
                         self.forController?.fiveDayWeatherArray = model
                     })
-                    //print(model2)
+                    
                 }catch{
                     print(error)
                 }
@@ -82,10 +79,7 @@ class DataController {
             //CURRENT
             else {
                 do{
-                    //let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
-                    //print(json)
                     let model = try JSONDecoder().decode(WeatherDataModel.self, from:data!)
-                    //print(model)
                     
                     self.fetchWeather(url: "https://openweathermap.org/img/wn/\(model.weather[0].icon)@2x.png", cont: curController!)
                     

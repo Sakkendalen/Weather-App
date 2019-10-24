@@ -15,7 +15,6 @@ struct FiveDayWeatherModel : Codable {
 
 struct FiveDayWeatherList : Codable {
     let dt_txt : String
-    //let dt : Date
     let main : FiveDayMain
     let weather : [FiveDayWeather]
 }

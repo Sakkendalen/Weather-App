@@ -62,8 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         geoCod.reverseGeocodeLocation(location!, completionHandler: {(placemarks, error) -> Void in
             var place: CLPlacemark!
             place = placemarks?[0]
-            print("Asking new location")
-            print(place)
+            //print("Asking new location")
+            //print(place)
             self.placeMark = placemarks?[0]
             self.curController?.setLocation(loc: self.locations!, place: place)
             self.foreController?.setLocation(loc: self.locations!)
@@ -107,130 +107,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    /*
-    func fecthUrl(url: String){
-        
-        let config = URLSessionConfiguration.default
-        
-        let session = URLSession(configuration: config)
-        
-        let url : URL? = URL(string: url)
-        
-        let task = session.dataTask(with: url!, completionHandler: doneFetching);
-        
-        // Starts the task, spawns a new thread and calls the callback function
-        task.resume();
-    }
-    
-    
-    func doneFetching(data: Data?, response: URLResponse?, error: Error?) {
-        
-        // Execute stuff in UI thread
-        if let resstr = String(data: data!, encoding: String.Encoding.utf8){
-            //print(resstr)
-            if resstr.contains("\"cod\":\"200\""){
-                do{
-                    //print("forecast!!")
-                    //let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
-                    //print(json)
-                    let model2 = try JSONDecoder().decode(FiveDayWeatherModel.self, from:data!)
-                    DispatchQueue.main.async(execute: {() in
-                        self.foreController!.passData(model: model2)
-                    })
-                    //print(model2)
-                }catch{
-                    print(error)
-                }
-            }
-            else {
-                do{
-                    _ = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
-                    //print(json)
-                    let model = try JSONDecoder().decode(WeatherDataModel.self, from:data!)
-                    //print(model)
-                    
-                    self.fecthUrl(url: "https://openweathermap.org/img/wn/\(model.weather[0].icon)@2x.png")
-                    
-                    DispatchQueue.main.async(execute: {() in
-                        self.passDatatoCurrent(model: model)
-                    })
-                }catch{
-                    print(error)
-                }
-            }
-        } else if let image = UIImage(data: data!){
-            DispatchQueue.main.async(execute: {() in
-                self.passImagetoCurrent(image: image)
-            })
-        }
-    }
-    
-    func passDatatoCurrent(model: WeatherDataModel){
-        curController!.takeData(model: model)
-    }
-    
-    func passImagetoCurrent(image: UIImage){
-        curController!.takeImage(image: image)
-    }
-    
-    
-    func getWeather(){
-        print("nopee")
-        let session = URLSession.shared
-        HOX!!! PLACEHOLDER CUPERTINO!!
-        let weatherURL = URL(string: "http://api.openweathermap.org/data/2.5/weather?q=California,us&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")!
-        let dataTask = session.dataTask(with: weatherURL) {
-            (data: Data?, response: URLResponse?, error: Error?) in
-            if let error = error {
-                print("Error:\n\(error)")
-            } else {
-                if let data = data {
-                    let dataString = String(data: data, encoding: String.Encoding.utf8)
-                    print("All the weather data:\n\(dataString!)")
-                    if let jsonObj = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? NSDictionary {
-                        if let mainDictionary = jsonObj!.value(forKey: "main") as? NSDictionary {
-                            if let temperature = mainDictionary.value(forKey: "temp") {
-                                DispatchQueue.main.async {
-                                    self.temp = "\(temperature)"
-                                }
-                            }
-                        } else {
-                            print("Error: unable to find temperature in dictionary")
-                        }
-                    } else {
-                        print("Error: unable to convert json data")
-                    }
-                } else {
-                    print("Error: did not receive data")
-                }
-            }
-        }
-        dataTask.resume()
- 
-    }
-    
-    func fethlocations(){
-        
-        let location = CLLocation(latitude: 0.0, longitude: 0.0)
-        
-        CLGeocoder().reverseGeocodeLocation(location, completionHandler: {(placemarks, error) -> Void in
-            
-            if error != nil {
-                print("Reverse geocoder failed with error" + error!.localizedDescription)
-                return
-            }
-            
-            if placemarks!.count > 0 {
-                let pm = placemarks![0]
-                let locString : String = pm.locality!
-                //self.loc = locString
-                print(locString)
-            }
-            else {
-                print("Problem with the data received from geocoder")
-            }})
-    }
- */
 
 }
 
