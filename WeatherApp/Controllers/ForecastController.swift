@@ -17,6 +17,7 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
     var dataController : DataController?
     var geoCoder = CLGeocoder()
     var location : CLLocationCoordinate2D?
+    var locationManager : CLLocationManager?
 
     @IBOutlet weak var table: UITableView!
     
@@ -24,14 +25,12 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
         super.viewDidLoad()
         self.table.dataSource = self
         self.table.delegate = self
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewDidAppear(_ animated: Bool) {
         table.reloadData()
     }
     
-    /*
     override func encodeRestorableState(with coder: NSCoder) {
         
         UserDefaults.standard.set(stuff, forKey: "forecastArray")
@@ -48,7 +47,6 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
         
         super.decodeRestorableState(with: coder)
     }
- */
     
     func setLocation(loc : CLLocationCoordinate2D){
         
@@ -59,7 +57,10 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
     
     func changeLocation(command: String){
         if(command == "Use GPS") {
+            locationManager?.startUpdatingLocation()
+            /*
             dataController!.fetchForecast(url: "https://api.openweathermap.org/data/2.5/forecast?lat=\(location!.latitude)&lon=\(location!.longitude)&cnt=40&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2",cont: self)
+            */
         }
         else {
             let str = command
@@ -69,23 +70,21 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //NSLog("\(stuff[indexPath.row])")
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let count = self.fiveDayWeatherArray?.list.count {
-            //print("COUNT")
+
             return count
         }
         else {
-            //print("array empty")
+
             return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let df = DateFormatter()
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "myProtoCell", for: indexPath) as! ForecastCell
         
@@ -104,8 +103,7 @@ class ForecasController: UIViewController, UITableViewDataSource, UITableViewDel
         }
         //date
         if let txt = self.fiveDayWeatherArray?.list[indexPath.row].dt_txt {
-            df.dateFormat = "yyyy-MM-dd hh:mm:ss"
-            let now = self.fiveDayWeatherArray?.list[indexPath.row].dt_txt
+            let now = txt
             cell.dateLabel.text = now
         }
         

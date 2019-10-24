@@ -44,6 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         
         self.locationManager = CLLocationManager()
         
+        curController?.locationManager = self.locationManager
+        foreController?.locationManager = self.locationManager
+        cityController?.locationManager = self.locationManager
+        
         self.locationManager!.delegate = self
         locationManager!.requestAlwaysAuthorization()
         self.locationManager!.startUpdatingLocation()
@@ -52,23 +56,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        //let loc = locations.last
-        let lat = self.locationManager?.location!.coordinate.latitude
-        let lon = self.locationManager?.location!.coordinate.longitude
-        //fecthUrl(url: "https://api.openweathermap.org/data/2.5/weather?lat=\(lat!)&lon=\(lon!)&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")
-        //fecthUrl(url: "https://api.openweathermap.org/data/2.5/forecast?lat=\(lat!)&lon=\(lon!)&cnt=40&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2")
         
         self.locations = self.locationManager?.location?.coordinate
         self.location = CLLocation(latitude: (self.locations?.latitude)!, longitude: (self.locations?.longitude)!)
         geoCod.reverseGeocodeLocation(location!, completionHandler: {(placemarks, error) -> Void in
             var place: CLPlacemark!
             place = placemarks?[0]
+            print("Asking new location")
+            print(place)
             self.placeMark = placemarks?[0]
             self.curController?.setLocation(loc: self.locations!, place: place)
             self.foreController?.setLocation(loc: self.locations!)
         })
         
         self.locationManager!.stopUpdatingLocation()
+    }
+    
+    func getNewLocation(){
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager?.startUpdatingLocation()
+        }
     }
     
     func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {

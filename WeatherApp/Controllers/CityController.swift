@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class CityController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -17,6 +18,7 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
     var selectedCity : Int?
     
     var dataController : DataController?
+    var locationManager : CLLocationManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +49,6 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //fetch and check array from userdefaults and assign them to stuff Array
         if let defList = UserDefaults.standard.stringArray(forKey: "myStuff"){
-            print(defList)
             stuff = defList
             table.reloadData()
         }
@@ -81,7 +82,6 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //SLog("\(indexPath.row)")
         selectedCity = indexPath.row
         dataController?.locationChanged(command: "\(stuff[indexPath.row])")
     }

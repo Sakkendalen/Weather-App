@@ -65,9 +65,8 @@ class DataController {
             //FORECAST
             if resstr.contains("\"cod\":\"200\""){
                 do{
-                    print("HEPHEP!")
-                    let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
-                    print(json)
+                    //let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any]
+                    //print(json)
                     let model = try JSONDecoder().decode(FiveDayWeatherModel.self, from:data!)
                     //print(model)
                     DispatchQueue.main.async(execute: {() in

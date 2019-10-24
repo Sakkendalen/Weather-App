@@ -15,6 +15,7 @@ class CurrentWeatherController: UIViewController {
     
     var geoCoder = CLGeocoder()
     var location : CLLocationCoordinate2D?
+    var locationManager : CLLocationManager?
     
     @IBOutlet weak var place: UILabel!
     @IBOutlet weak var temperature: UILabel!
@@ -29,7 +30,6 @@ class CurrentWeatherController: UIViewController {
 
     }
     
-    /*
     override func encodeRestorableState(with coder: NSCoder) {
         
         coder.encode(self.place.text, forKey: "placeName")
@@ -58,33 +58,29 @@ class CurrentWeatherController: UIViewController {
         }
         super.decodeRestorableState(with: coder)
     }
-    */
 
     func setLocation(loc : CLLocationCoordinate2D, place : CLPlacemark){
         self.location = loc
         self.place.text = place.locality!
         dataController!.fetchWeather(url: "https://api.openweathermap.org/data/2.5/weather?lat=\(loc.latitude)&lon=\(loc.longitude)&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2",cont: self)
-        //print(place.locality)
-        print(loc)
-        //print(place)
     }
     
     func changeLocation(command: String){
         if(command == "Use GPS") {
+            locationManager?.startUpdatingLocation()
+            /*
             let locTest = CLLocation(latitude: self.location!.latitude, longitude: self.location!.longitude)
             
             geoCoder.reverseGeocodeLocation(locTest, completionHandler: { (placemarks, error) -> Void in
-                
 
                 var placeMark: CLPlacemark!
                 placeMark = placemarks?[0]
-                
-                
-                //print(placeMark.addressDictionary as Any)
+
                 self.place.text = placeMark.locality!
             })
             
             dataController!.fetchWeather(url: "https://api.openweathermap.org/data/2.5/weather?lat=\(location!.latitude)&lon=\(location!.longitude)&units=metric&APPID=dc5b74f20581fd613891997b305fcfd2",cont: self)
+            */
             
         }
         else {
