@@ -23,15 +23,15 @@ User can select does app fetch weather data by gps or by City name. User can add
 
 * Current weather
 
-![Current Weather](Weather-App/WeatherApp/images/Current.png)
+![Current Weather](./WeatherApp/images/Current.png)
 
 * Forecast 5Day/3Hour
 
-![Forecast](Weather-App/WeatherApp/images/Forecast.png)
+![Forecast](./WeatherApp/images/Forecast.png)
 
 * Select City
 
-![City Selection](Weather-App/WeatherApp/images/City.png)
+![City Selection](./WeatherApp/images/City.png)
 
 ## Status
 
