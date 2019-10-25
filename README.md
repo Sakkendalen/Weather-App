@@ -7,6 +7,7 @@ A Simple ios App that fecthes weather data from openweathermap.org and displays 
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Features](#features)
+* [Status](#status)
 
 ## General info
 
