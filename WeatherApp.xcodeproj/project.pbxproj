@@ -55,9 +55,9 @@
 		992A103F234CB12D00D1A6CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		99BC61892355BF7400DC3C62 /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
 		99BD70162362D91F0053C2CE /* WeatherAppIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeatherAppIcon.png; sourceTree = "<group>"; };
-		99BD701F2362EE8F0053C2CE /* Screen Shot 2019-10-25 at 10.49.13 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2019-10-25 at 10.49.13 copy.png"; sourceTree = "<group>"; };
-		99BD70202362EE8F0053C2CE /* Screen Shot 2019-10-25 at 10.48.47 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2019-10-25 at 10.48.47 copy.png"; sourceTree = "<group>"; };
-		99BD70212362EE8F0053C2CE /* Screen Shot 2019-10-25 at 10.47.18 copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2019-10-25 at 10.47.18 copy.png"; sourceTree = "<group>"; };
+		99BD701F2362EE8F0053C2CE /* City.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = City.png; sourceTree = "<group>"; };
+		99BD70202362EE8F0053C2CE /* Forecast.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Forecast.png; sourceTree = "<group>"; };
+		99BD70212362EE8F0053C2CE /* Current.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Current.png; sourceTree = "<group>"; };
 		99DDBA68234DD75E00459AD8 /* CurrentWeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherController.swift; sourceTree = "<group>"; };
 		99DDBA6A234DD76F00459AD8 /* ForecastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastController.swift; sourceTree = "<group>"; };
 		99DDBA6C234DD77D00459AD8 /* CityController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityController.swift; sourceTree = "<group>"; };
@@ -156,9 +156,9 @@
 		99BD701E2362EE8F0053C2CE /* images */ = {
 			isa = PBXGroup;
 			children = (
-				99BD70212362EE8F0053C2CE /* Screen Shot 2019-10-25 at 10.47.18 copy.png */,
-				99BD70202362EE8F0053C2CE /* Screen Shot 2019-10-25 at 10.48.47 copy.png */,
-				99BD701F2362EE8F0053C2CE /* Screen Shot 2019-10-25 at 10.49.13 copy.png */,
+				99BD70212362EE8F0053C2CE /* Current.png */,
+				99BD70202362EE8F0053C2CE /* Forecast.png */,
+				99BD701F2362EE8F0053C2CE /* City.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
