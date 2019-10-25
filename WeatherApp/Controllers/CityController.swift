@@ -61,11 +61,16 @@ class CityController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func addCity(_ sender: Any) {
-        if cityTextField.text != nil {
-            if !stuff.contains(cityTextField.text!){
-                self.stuff.append(cityTextField.text!)
-                table.reloadData()
-                cityTextField.text = ""
+        if let text = cityTextField.text{
+            if text != nil &&
+                text != "" &&
+                text.trimmingCharacters(in: .whitespaces).count != 0 {
+                print(text)
+                if !stuff.contains(cityTextField.text!){
+                    self.stuff.append(cityTextField.text!)
+                    table.reloadData()
+                    cityTextField.text = ""
+                }
             }
         }
     }
