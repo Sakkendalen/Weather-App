@@ -1,6 +1,6 @@
 # Weather-App
 
-A simple ios app to cheack on weather
+A Simple ios App that fecthes weather data from openweathermap.org and displays them.
 
 ## Table of contents
 
@@ -10,11 +10,14 @@ A simple ios app to cheack on weather
 
 ## General info
 
-Add more general information about project. What the purpose of the project is? Motivation? The projects idea is a easy to use weather app were you can see the current weather and the forecast for 5 days. User can select a citie to!
+A Simple ios App that fecthes weather data from openweathermap.org and displays them.
+User can view fecthed data as what is current weather in that area and 5 Day forecast which have 3 hours between every data.
+User can select does app fetch weather data by gps or by City name. User can add and delete cities.
 
 ## Technologies
 
-* XCode - version 9.4.1
+* XCode - version 10.1
+* Swift - version 4.2.1
 
 ## Features
 
