@@ -1,6 +1,6 @@
 # Weather-App
 
-A Simple ios App that fecthes weather data from openweathermap.org and displays them.
+A ios App that fetches weather data from openweathermap.org and displays them.
 
 ## Table of contents
 
